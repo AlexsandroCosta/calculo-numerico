@@ -19,14 +19,14 @@ def rcbPrec():
     prec = float(int(nums[0])**int(nums[1]))
     return prec
 
-
 func = input('Função: ').replace(' ', '')
-a = float(input('a: '))
-b = float(input('b: '))
+a = float(input('Intervalo a: '))
+b = float(input('Intervalo b: '))
 prec = rcbPrec()
 
 if (b-a) > prec:
     cont = 1
+    m = resFunc(func, a)
 
     print('{:^10}| {:^11} | {:^15} | {:^15}'.format('Iteração', 'x', 'f(x)', 'b-a'))
     
@@ -34,15 +34,19 @@ if (b-a) > prec:
         x = (a+b)/2
         fx = resFunc(func, x)
 
-        if fx < 0:
-            b = x
-        else:
+        if (m*fx) > 0:
             a = x
+        else:
+            b = x
 
         print(f'{cont:^10}| {x:.9f} | {fx:^15.8e} | {(b-a):^15.8e}')
 
         if (b-a) < prec:
+            x = (a+b)/2
             break
 
         cont+=1
+else:
+    x = a
 
+print(f'\nx = {x:.9f} em {cont} iterações.')
