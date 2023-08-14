@@ -12,11 +12,20 @@ def resFunc(func, n):
     if 'log' in func:
         i = func.index('l')
         x = math.log10(n)
-        
-        if func[i-1] == 'x':
-            func = func.replace('xlog(x)', str(n)+'*'+str(x))
+
+        if func[i-1] not in '-+*/':
+            func = func.replace('log(x)', '*'+str(x))
         else:
             func = func.replace('log(x)', str(x))
+
+    if 'sqrt' in func:
+        i = func.index('s')
+        x = math.sqrt(n)
+
+        if func[i-1] not in '-+*/':
+            func = func.replace('sqrt(x)', '*'+str(x))
+        else:
+            func = func.replace('sqrt(x)', str(x))
 
     func = re.split(r'\s*([-+*/])\s*', func.replace('x', '*'+str(n)))
 
