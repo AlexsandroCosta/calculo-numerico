@@ -2,7 +2,7 @@ import math
 import re
 
 def rcbPrec():
-    prec = input('Precisão: ')
+    prec = input('Precisão (Ex: 10^-3): ')
 
     if '^' in prec:
         x = prec.split('^')
@@ -49,18 +49,22 @@ def bissec(func, a, b, prec):
             print(f'{cont:^10}| {x:.9f} | {fx:^15.8e} | {(b-a):^15.8e}')
 
             if (b-a) < prec:
+                x = (a+b)/2
                 break
 
             cont += 1
     else:
-        print('Os limites devem ter sinais opostos.')
-        exit(0)
+        x = (a+b)/2
+
+    print(f'\nx = {x} em {cont} iterações.\n')
     
+while True:
+    func = input('Função (Ex: x^3-9x+3): ').replace(' ', '')
+    a = float(input('Intervalo a: '))
+    b = float(input('Intervalo b: '))
+    prec = rcbPrec()
 
-func = input('Função: ').replace(' ', '')
-a = float(input('Intervalo a: '))
-b = float(input('Intervalo b: '))
-prec = rcbPrec()
+    bissec(func, a, b, prec)
 
-bissec(func, a, b, prec)
-
+    if input('Digite 0 p/ encerrar ou 1 p/ continuar: ') == '0':
+        break
