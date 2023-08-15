@@ -2,7 +2,7 @@ import math
 import re
 
 def rcbPrec():
-    prec = input('Precisão (Ex: 10^-3): ')
+    prec = input('Precisão (Ex: 10^-3): ').replace(' ', '')
 
     if '^' in prec:
         x = prec.split('^')
@@ -61,7 +61,7 @@ def bissec(func, a, b, prec):
         cont = 1
         m = resFunc(func, a)
 
-        print('{:^10}| {:^11} | {:^15} | {:^15}'.format('Iteração', 'x', 'f(x)', 'b-a'))
+        print('\n{:^10}| {:^11} | {:^15} | {:^15}'.format('Iteração', 'x', 'f(x)', 'b-a'))
 
         while True:
             x = (a+b)/2
@@ -84,8 +84,28 @@ def bissec(func, a, b, prec):
 
     print(f'\nx = {x} em {cont} iterações.\n')
     
+info = '''
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-INFORMAÇÕES-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-
+Funções:
+    Potenciação -> Use o ^ para elevar um número (Ex: x^3)
+    Logaritmo -> Use log() para calcular o logaritmo na base 10 (Ex: log(x))
+    Raiz quadrada -> sqrt()
+    Seno -> sen() 
+    Cosseno -> cos()
+
+Intervalos:
+    Os intervalos podem incluir números inteiros ou reais.
+        Obs: Utilize o ponto (.) em vez da vírgula para representar números reais (Ex: 2.5). 
+
+Precisão:
+    A precisão é indicada como 10 elevado a algum valor (Ex: 10^-3).
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-
+'''
+
+print(info, end='')
+
 while True:
-    func = input('Função (Ex: x^3-9x+3): ').replace(' ', '')
+    func = input('\nDigite a função: ').replace(' ', '')
     a = float(input('Intervalo a: '))
     b = float(input('Intervalo b: '))
     prec = rcbPrec()
