@@ -8,24 +8,41 @@ def rcbPrec():
         x = prec.split('^')
         return float(float(x[0])**float(x[1]))
     
+def lssc(func, n, op):
+    if op in func:
+        mod = False
+        i = func.index(op[0])
+
+        if func[i+len(op)+1] != 'x':
+            n = float(func[func.index('(')+1])
+            mod = True
+        
+        if op == 'log':
+            x = math.log10(n)
+        elif op == 'sqrt':
+            x = math.sqrt(n)
+        elif op == 'sen':
+            x = math.sin(n)
+        elif op == 'cos':
+            x = math.cos(n)
+
+        if func[i-1] not in '-+*/':
+            if mod:
+                return func.replace(f'{op}({func[i+len(op)+1]})', '*'+str(x))
+            else:
+                return func.replace(f'{op}(x)', '*'+str(x))
+        else:
+            if mod:
+                return func.replace(f'{op}({func[i+len(op)+1]})', str(x))
+            else:
+                return func.replace(f'{op}(x)', str(x))
+
 def resFunc(func, n):
-    if 'log' in func:
-        i = func.index('l')
-        x = math.log10(n)
+    lista = ['log','sqrt','sen','cos']
 
-        if func[i-1] not in '-+*/':
-            func = func.replace('log(x)', '*'+str(x))
-        else:
-            func = func.replace('log(x)', str(x))
-
-    if 'sqrt' in func:
-        i = func.index('s')
-        x = math.sqrt(n)
-
-        if func[i-1] not in '-+*/':
-            func = func.replace('sqrt(x)', '*'+str(x))
-        else:
-            func = func.replace('sqrt(x)', str(x))
+    for i in range(len(lista)):
+        if lista[i] in func:
+            func = lssc(func, n, lista[i])
 
     func = re.split(r'\s*([-+*/])\s*', func.replace('x', '*'+str(n)))
 
