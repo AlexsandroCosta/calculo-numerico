@@ -87,15 +87,15 @@ def bissec(func, a, b, prec):
 info = '''
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-INFORMAÇÕES-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-
 Funções:
-    Potenciação -> Use o ^ para elevar um número (Ex: x^3)
+    Potenciação -> Use o (^) para elevar um número (Ex: x^3)
     Logaritmo -> Use log() para calcular o logaritmo na base 10 (Ex: log(x))
     Raiz quadrada -> sqrt()
     Seno -> sen() 
     Cosseno -> cos()
 
 Intervalos:
-    Os intervalos podem incluir números inteiros ou reais.
-        Obs: Utilize o ponto (.) em vez da vírgula para representar números reais (Ex: 2.5). 
+    Os intervalos podem incluir números inteiros ou decimais.
+        Obs: Utilize o ponto (.) em vez da vírgula para representar números decimais (Ex: 2.5). 
 
 Precisão:
     A precisão é indicada como 10 elevado a algum valor (Ex: 10^-3).
