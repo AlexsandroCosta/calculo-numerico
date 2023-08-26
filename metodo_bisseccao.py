@@ -96,6 +96,7 @@ Funções:
     Raiz quadrada -> sqrt() (Ex: sqrt(9))
     Seno -> sen() 
     Cosseno -> cos()
+    Tangente -> tg()
 
 Intervalos:
     Os intervalos podem incluir números inteiros ou decimais.
