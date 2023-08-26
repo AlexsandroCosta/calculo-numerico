@@ -30,6 +30,8 @@ def lssc(func, n, op):
             x = math.sin(n)
         elif op == 'cos':
             x = math.cos(n)
+        elif op == 'tg':
+            x = math.tan(n)
 
         if func[i-1] not in '-+*/':
             if mod:
@@ -43,7 +45,7 @@ def lssc(func, n, op):
                 return func.replace(f'{op}(x)', str(x))
 
 def resFunc(func, n):
-    lista = ['log','sqrt','sen','cos']
+    lista = ['log','sqrt','sen','cos', 'tg']
 
     for i in range(len(lista)):
         if lista[i] in func:
@@ -54,6 +56,8 @@ def resFunc(func, n):
     for i in range(0, len(func)):
         if func[i] == '':
             func[i] = '1'
+        elif func[i] == '(':
+            func[i]= '(1'
 
         if func[i].find('^') != -1:
             exp = func[i].split('^')
@@ -104,6 +108,7 @@ Funções:
     Raiz quadrada -> sqrt() (Ex: sqrt(9))
     Seno -> sen() 
     Cosseno -> cos()
+    Tangente -> tg()
 
 Intervalos:
     Os intervalos podem incluir números inteiros ou decimais.
