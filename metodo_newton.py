@@ -48,7 +48,7 @@ def resFunc(func, n=''):
             if func[i-1] != '' and func[i-1][-1].isnumeric():
                 func[i] = func[i].replace('x', '*x')
     
-    func = (''.join(func).replace('x', str(n))
+    func = (''.join(func)).replace('x', str(n))
 
     return eval(func)
 
