@@ -48,7 +48,7 @@ def resFunc(func, n=''):
             if func[i-1] != '' and func[i-1][-1].isnumeric():
                 func[i] = func[i].replace('x', '*x')
     
-    func = (''.join(map(str,func))).replace('x', str(n))
+    func = (''.join(func).replace('x', str(n))
 
     return eval(func)
 
@@ -60,7 +60,7 @@ def derivFunc(func, n):
             if func[i-1] != '' and func[i-1][-1].isnumeric():
                 func[i] = func[i].replace('x', '*x')
 
-    func = ''.join(map(str,func))
+    func = ''.join(func)
 
     return str(sp.diff(sp.sympify(func), sp.symbols('x'))).replace('x', str(n))
 
