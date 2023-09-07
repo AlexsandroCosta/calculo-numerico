@@ -12,7 +12,7 @@ def precisao():
     return eval(prec1.replace('^', '**')), eval(prec1.replace('^', '**'))
 
 def sctl(func, v=0):
-    lista = ['^','sen', 'sin','cos','tg','log','sqrt','e']
+    lista = ['^','sen','cos','tg','log','sqrt','e']
 
     if v:
         for i in lista:
@@ -30,7 +30,7 @@ def sctl(func, v=0):
             if i in func:
                 if i == '^':
                     func = func.replace(i, '**')
-                if i == 'sen' or i == 'sin':
+                if i == 'sen':
                     func = func.replace(i, 'math.sin')
                 elif i == 'tg':
                     func = func.replace(i, 'math.tan')
@@ -62,7 +62,7 @@ def derivFunc(func, n):
 
     func = ''.join(func)
 
-    return str(sp.diff(sp.sympify(func), sp.symbols('x'))).replace('x', str(n))
+    return str(sp.diff(sp.sympify(func), sp.symbols('x'))).replace('x', str(n)).replace('sin', 'sen')
 
 def newton(func, inic, prec1, prec2):
     if abs(resFunc(func, inic)) >= prec1:
@@ -70,7 +70,7 @@ def newton(func, inic, prec1, prec2):
         
         print('\n{:^10}| {:^11} | {:^15}'.format('Iteração', 'x', 'f(x)'))
 
-        while True:
+        while cont <= 50:
             fx = resFunc(func, inic)
 
             print(f'{cont:^10}| {inic:.9f} | {fx:^15.8e}')
@@ -87,6 +87,9 @@ def newton(func, inic, prec1, prec2):
             
             inic = x
             cont+=1
+
+        if cont >= 50:
+            print('\nMáximo de iterações atingido.')
 
     print(f'\nAssim, x = {inic:.9f} e f(x) = {fx:^15.8e}.\n')
            
