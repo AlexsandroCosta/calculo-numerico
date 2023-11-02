@@ -4,18 +4,26 @@ n = 0
 
 def exibiMatriz():
     tmax = max(max(max(len(f'{j}') for j in i)for i in matriz), max(len(f'{i}') for i in b))
- 
+    if tmax > 6:
+        tmax = 6
+
     for ind, linha in enumerate(matriz):
         for elemento in linha:
             if len(str(elemento).split("."))==2 and str(elemento).split(".")[1] == '0':
                 print(f'{elemento:{tmax+2}.0f}', end="")
             else:
-                print(f'{elemento:{tmax+2}}', end="")
+                if len(f'{elemento}') > 6:
+                    print(f'{elemento:{tmax+2}.4f}', end="")
+                else:
+                    print(f'{elemento:{tmax+2}}', end="")
 
         if len(str(b[ind]).split("."))==2 and str(b[ind]).split(".")[1] == '0':
             print(f' |{b[ind]:{tmax+2}.0f}', end="")
         else:
-            print(f' |{b[ind]:{tmax+2}}', end="")
+            if len(f'{b[ind]}') > 6:
+                print(f' |{b[ind]:{tmax+2}.4f}', end="")
+            else:
+                print(f' |{b[ind]:{tmax+2}}', end="")
         print()
     print()
 
@@ -25,7 +33,6 @@ def pivoteamento(k):
         if abs(matriz[i][k]) > abs(matriz[index][k]):
             index = i
 
-    # trocar as linhas
     matriz[k], matriz[index] = matriz[index], matriz[k]
     b[k], b[index] = b[index], b[k]
 
@@ -42,7 +49,7 @@ def resolucao():
             
     print("\nSolução para as variáveis x:")
     for i in range(n):
-        print(f"x{i + 1} = {x[i]:.2f}")
+        print(f"x{i + 1} = {x[i]:.4f}")
 
 def elimicacao(pivotea=False):
     for k in range(n-1):
