@@ -1,16 +1,35 @@
-def exibiMatriz(matriz, b):
-    print()
+matriz = []
+b = []
+n = 0 
+
+def exibiMatriz():
+    tmax = max(max(max(len(f'{j}') for j in i)for i in matriz), max(len(f'{i}') for i in b))
+ 
     for ind, linha in enumerate(matriz):
-        for indc, elemento in enumerate(linha):
-            if indc == 0:
-                print(f'{elemento:.0f}', end="")
+        for elemento in linha:
+            if len(str(elemento).split("."))==2 and str(elemento).split(".")[1] == '0':
+                print(f'{elemento:{tmax+2}.0f}', end="")
             else:
-                print(f'{elemento:4.0f}', end="")
-        print(f' |{b[ind]:4.0f}', end="")
+                print(f'{elemento:{tmax+2}}', end="")
+
+        if len(str(b[ind]).split("."))==2 and str(b[ind]).split(".")[1] == '0':
+            print(f' |{b[ind]:{tmax+2}.0f}', end="")
+        else:
+            print(f' |{b[ind]:{tmax+2}}', end="")
         print()
     print()
 
-def resolucao(matriz, b, n):
+def pivoteamento(k):
+    index = k
+    for i in range(k+1, n):
+        if abs(matriz[i][k]) > abs(matriz[index][k]):
+            index = i
+
+    # trocar as linhas
+    matriz[k], matriz[index] = matriz[index], matriz[k]
+    b[k], b[index] = b[index], b[k]
+
+def resolucao():
     x = [0]*n
 
     for k in range(n-1, -1, -1):
@@ -23,10 +42,13 @@ def resolucao(matriz, b, n):
             
     print("\nSolução para as variáveis x:")
     for i in range(n):
-        print(f"x{i + 1} = {x[i]}")
+        print(f"x{i + 1} = {x[i]:.2f}")
 
-def elimicacao(matriz, b, n):
+def elimicacao(pivotea=False):
     for k in range(n-1):
+        if pivotea:
+            pivoteamento(k)
+
         for i in range(k+1, n):
             m = matriz[i][k]/matriz[k][k]
 
@@ -39,20 +61,19 @@ def elimicacao(matriz, b, n):
 
             b[i] -= m*b[k]
 
-        exibiMatriz(matriz, b)
+        exibiMatriz()
     
-    resolucao(matriz, b, n)
+    resolucao()
 
 def main():
-    n = int(input('Número de linhas e colunas: '))
+    global matriz, b, n
 
-    matriz = []
-    b = []
+    n = int(input('Número de linhas e colunas: '))
 
     print('Matriz estendida:')
     for i in range(n):
         while True:
-            linha = [int(n) for n in input().split()]
+            linha = [float(n) for n in input().split()]
             b.append(linha.pop())
 
             if len(linha) == n:
@@ -63,11 +84,15 @@ def main():
 
         matriz.append(linha)
 
-    elimicacao(matriz, b, n)
+    if input('Pivoteamento parcial (s/n)? ').lower() == 's':
+        elimicacao(pivotea=True)
+    else:
+        elimicacao()
 
 info = ''''
--> Quando passar a matriz estendida precione ENTER ao final de cada linha 
+-> Quando digitar a matriz estendida precione ENTER ao final de cada linha 
    e um espaço entre cada número.
 '''
+
 main()
 
