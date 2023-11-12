@@ -2,6 +2,60 @@ matriz = []
 b = []
 n = 0 
 
+def construirMatriz():
+    print('Digite as equações: ')
+    while True:
+        equa = input()
+
+        if not equa:
+            break
+
+        aux = []
+        ult = ''
+
+        #remove o número que vem depois de x
+        for i in equa.replace(' ', '0'):
+            if ult != 'x':
+                aux.append(i)
+            ult = i
+        
+        equa = ''.join(aux)
+        aux = []
+        ult = '0'
+
+        if equa[0] == 'x':
+            aux.append('1')
+        
+        #adicona 1 onde tem apenas o x
+        for v in equa.replace('x', ''):
+            if v in '+-=' and ult in '+-':
+                aux.append('1')
+
+            aux.append(v)
+            ult = v
+        
+        equa = ''.join(aux)
+        linha = []
+    
+        if equa[0].isdigit():
+            linha.append(int(equa[0]))
+
+        for i, v in enumerate(equa):
+            if v == '-':
+                linha.append(int(equa[i+1])*-1)
+            elif v == '+':
+                linha.append(int(equa[i+1]))
+            elif v == '=':
+                matriz.append(linha)
+                if equa[i+1] == '-':
+                    b.append(int(equa[i+2])*-1)
+                else:
+                    b.append(int(equa[i+1]))
+                break
+
+    print('Matriz extendida:')
+    exibiMatriz()
+
 def exibiMatriz():
     tmax = max(max(max(len(f'{j}') for j in i)for i in matriz), max(len(f'{i}') for i in b))
     if tmax > 6:
@@ -75,21 +129,7 @@ def elimicacao(pivotea=False):
 def main():
     global matriz, b, n
 
-    n = int(input('Número de linhas e colunas: '))
-
-    print('Matriz estendida:')
-    for i in range(n):
-        while True:
-            linha = [float(n) for n in input().split()]
-            b.append(linha.pop())
-
-            if len(linha) == n:
-                break
-
-            b.pop()
-            print(f'Uma linha deve conter {n} colunas')
-
-        matriz.append(linha)
+    construirMatriz()
 
     if input('Pivoteamento parcial (s/n)? ').lower() == 's':
         elimicacao(pivotea=True)
@@ -97,8 +137,7 @@ def main():
         elimicacao()
 
 info = ''''
--> Quando digitar a matriz estendida precione ENTER ao final de cada linha 
-   e um espaço entre cada número.
+-> Quando digitar todas equações precissone ENTER para finalizar.
 '''
 
 main()
