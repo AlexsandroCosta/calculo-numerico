@@ -44,9 +44,21 @@ def construirMatriz():
 
     for i, v in enumerate(equa):
       if v == '-':
-        linha.append(int(equa[i + 1]) * -1)
+        num = ''
+        for j in equa[i+1:]:
+          if j in '+-=':
+            break
+          num += j
+        linha.append(int(num) * -1)
+          
       elif v == '+':
-        linha.append(int(equa[i + 1]))
+        num = ''
+        for j in equa[i+1:]:
+          if j in '+-=':
+            break
+          num += j
+        linha.append(int(num))
+
       elif v == '=':
         matriz.append(linha)
         if equa[i + 1] == '-':
@@ -107,7 +119,7 @@ def pivoteamento(k,fatoracao=False):
 def fatoracaoLu(pivotea=False):
   if pivotea:      
     pzao = p[-1]
-    #multiplica as matrizes para descobrir o pzão
+    #multiplica as matrizes pra descobrir o pzão
     for i in range(len(p)-2, -1, -1):
       a = p[i]
       linha = []
@@ -134,6 +146,7 @@ def fatoracaoLu(pivotea=False):
   
   l = [[1 if j == i else 0 for j in range(n)] for i in range(n)]
   
+  #constroi a matriz L
   for i, var1 in enumerate(matriz):
     for j, var2 in enumerate(var1):
       if i > j:
@@ -198,13 +211,14 @@ def eliminacao(pivotea, fatoracao):
    
   if fatoracao:
     fatoracaoLu(pivotea)
-    
+
   resolucao()
 
 
 def main():
   global matriz, b, n, p
   pivotea = fatoracao = False
+  
   construirMatriz()
 
   n = len(matriz[0])
