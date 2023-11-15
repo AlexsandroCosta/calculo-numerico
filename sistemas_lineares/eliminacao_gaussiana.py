@@ -245,41 +245,40 @@ def main():
 
 
 info = ''''
-Gaussiana sem pivotemaente (pode fazer com)
-x1+x2+ +3x3=4
-2x1+x2-x3+x4=1
-3x1-x2-x3+2x4=-3
--x1+2x2+3x3-x4=4
-
-com pivoteamento
-2x1+4x2+3x3=1
-x1+2x2-2x3=11
-4x1+4x2+3x3=3
-
-2x1+2x2+x3+x4=7
-x1-x2+2x3-x4=1
-3x1+2x2-3x3-2x4=4
-4x1+3x2+2x3+x4=12
-
-LU Sem pivoteamento
-3x1+2x2+4x3=1
-x1+x2+2x3=2
-4x1+3x2+2x3=3
-
-LU Com pivoteamento
-3x1-4x2+x3=9
-x1+2x2+2x3=3
-4x1+ -3x3=-2
-
-LU Sem pivoteamento
-x1+x2+x3=-2
-2x1+x2-x3=1
-2x1-x2+x3=3
-
-1,-2,-1
-
--> Digitar todas as equações e precissone ENTER para finalizar.
+-> Ao digitar todas as equações, precissone ENTER para finalizar.
 -> Deixe um espaço onde não houver 'x'. Exemplo: x1+x2+ +3x4=4
 '''
 
+print(info)
 main()
+
+# Gaussiana sem pivotemaente (pode fazer com)
+# x1+x2+ +3x3=4
+# 2x1+x2-x3+x4=1
+# 3x1-x2-x3+2x4=-3
+# -x1+2x2+3x3-x4=4
+
+# com pivoteamento
+# 2x1+4x2+3x3=1
+# x1+2x2-2x3=11
+# 4x1+4x2+3x3=3
+
+# 2x1+2x2+x3+x4=7
+# x1-x2+2x3-x4=1
+# 3x1+2x2-3x3-2x4=4
+# 4x1+3x2+2x3+x4=12
+
+# LU Sem pivoteamento
+# 3x1+2x2+4x3=1
+# x1+x2+2x3=2
+# 4x1+3x2+2x3=3
+
+# LU Com pivoteamento
+# 3x1-4x2+x3=9
+# x1+2x2+2x3=3
+# 4x1+ -3x3=-2
+
+# LU Sem pivoteamento
+# x1+x2+x3=-2
+# 2x1+x2-x3=1
+# 2x1-x2+x3=3
