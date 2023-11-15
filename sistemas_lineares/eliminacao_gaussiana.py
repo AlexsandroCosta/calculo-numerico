@@ -159,11 +159,11 @@ def fatoracaoLu(pivotea=False):
 
   print('L:')
   exibeMatriz(l, True)
-  print('U:')
-  exibeMatriz(fatoracao=True)
 
   resolucao(l, y=True)
 
+  print('U:')
+  exibeMatriz(fatoracao=True)
 
 def resolucao(matriz=matriz, y=False):
   x = [0] * n
