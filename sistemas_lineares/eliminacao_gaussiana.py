@@ -68,15 +68,16 @@ def construirMatriz():
         break
 
   print('Matriz extendida:')
-  exibiMatriz()
+  exibeMatriz()
 
 
-def exibiMatriz(fatoracao=False):
+def exibeMatriz(matriz = matriz, fatoracao=False):
   tmax = max(max(max(len(f'{j}') for j in i) for i in matriz),
              max(len(f'{i}') for i in b))
   if tmax > 6:
     tmax = 6
 
+  print()
   for ind, linha in enumerate(matriz):
     for elemento in linha:
       if len(str(elemento).split(".")) == 2 and str(elemento).split(
@@ -100,7 +101,6 @@ def exibiMatriz(fatoracao=False):
 
 
 def pivoteamento(k,fatoracao=False):
-  
   index = k
   for i in range(k + 1, n):
     if abs(matriz[i][k]) > abs(matriz[index][k]):
@@ -119,6 +119,7 @@ def pivoteamento(k,fatoracao=False):
 def fatoracaoLu(pivotea=False):
   if pivotea:      
     pzao = p[-1]
+
     #multiplica as matrizes pra descobrir o pzão
     for i in range(len(p)-2, -1, -1):
       a = p[i]
@@ -132,6 +133,9 @@ def fatoracaoLu(pivotea=False):
           aux.append(soma)
         linha.append(aux)
       pzao = linha
+
+    print('P: ')
+    exibeMatriz(pzao, True)
 
     #muda a linha dos resltados das equações    
     aux = []
@@ -153,6 +157,11 @@ def fatoracaoLu(pivotea=False):
         l[i][j] = var2
         matriz[i][j] = 0
 
+  print('L:')
+  exibeMatriz(l, True)
+  print('U:')
+  exibeMatriz(fatoracao=True)
+
   resolucao(l, y=True)
 
 
@@ -171,6 +180,9 @@ def resolucao(matriz=matriz, y=False):
     for i in range(n):
       b[i] = x[i]
     
+    for i in range(n):
+        print(f"y{i + 1} = {b[i]}")
+
   else:
     for k in range(n - 1, -1, -1):
       s = 0
@@ -207,7 +219,7 @@ def eliminacao(pivotea, fatoracao):
       if not fatoracao:
         b[i] -= m * b[k]
 
-    exibiMatriz(fatoracao)
+    exibeMatriz(fatoracao=fatoracao)
    
   if fatoracao:
     fatoracaoLu(pivotea)
