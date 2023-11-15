@@ -134,7 +134,7 @@ def fatoracaoLu(pivotea=False):
         linha.append(aux)
       pzao = linha
 
-    print('P: ')
+    print('P:', end='')
     exibeMatriz(pzao, True)
 
     #muda a linha dos resltados das equações    
@@ -157,12 +157,12 @@ def fatoracaoLu(pivotea=False):
         l[i][j] = var2
         matriz[i][j] = 0
 
-  print('L:')
+  print('L:', end='')
   exibeMatriz(l, True)
 
   resolucao(l, y=True)
 
-  print('U:')
+  print('\nU:', end='')
   exibeMatriz(fatoracao=True)
 
 def resolucao(matriz=matriz, y=False):
